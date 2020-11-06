@@ -1,0 +1,25 @@
+syntax = "proto3";
+package RSATest;
+
+
+service CAServer {
+    rpc GetCert (IssueCertRequest) returns (IssueCertResponse){}
+}
+
+message IssueCertRequest {
+    string public_key = 1;
+}
+message IssueCertResponse {
+    string cert = 1;
+}
+
+service Greeter {
+    rpc SayHello(HelloRequest) returns (HelloResponse){}
+}
+
+message HelloRequest {
+    string request = 1;
+}
+message HelloResponse{
+    string response = 1;
+}
