@@ -1,5 +1,5 @@
 syntax = "proto3";
-package RSATest;
+package auth;
 message DeviceInfo {
     string SN           = 1;
     string hostname     = 2;
@@ -21,6 +21,8 @@ message Cookie {
 }
 
 message AgentAuthInfo{
-    DeviceInfo info         = 1;
-    repeated Cookie cookies = 2;
+    int64 did               = 1;
+    string token            = 2;
+    DeviceInfo info         = 3;
+    repeated Cookie cookies = 4;
 }

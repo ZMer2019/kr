@@ -4,9 +4,9 @@
 
 #include "http_server.h"
 #include <auth_message.pb.h>
-using RSATest::Cookie;
-using RSATest::AgentAuthInfo;
-using RSATest::DeviceInfo;
+using auth::Cookie;
+using auth::AgentAuthInfo;
+using auth::DeviceInfo;
 void HttpServer::Start() {
     //route
     httpServer_->Get("/auth", AuthHandler);
@@ -29,6 +29,8 @@ void HttpServer::AuthHandler(const httplib::Request &request, httplib::Response 
 
 std::string HttpServer::serialize() {
     AgentAuthInfo agentAuthInfo;
+    agentAuthInfo.set_did(1234);
+    agentAuthInfo.set_token("token_test");
     DeviceInfo deviceInfo;
     std::string str = "";
     deviceInfo.set_sn("1234567890");
@@ -52,5 +54,7 @@ std::string HttpServer::serialize() {
     ck->set_secure(false);
 
     agentAuthInfo.SerializePartialToString(&str);
-    return str;
+    std::string base64str = "";
+    Crypto::Base64Encode(str, &base64str);
+    return base64str;
 }

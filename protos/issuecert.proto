@@ -1,9 +1,9 @@
 syntax = "proto3";
-package RSATest;
+package auth;
 
 
 service CAServer {
-    rpc GetCert (IssueCertRequest) returns (IssueCertResponse){}
+    rpc IssueCert (IssueCertRequest) returns (IssueCertResponse){}
 }
 
 message IssueCertRequest {
@@ -11,15 +11,4 @@ message IssueCertRequest {
 }
 message IssueCertResponse {
     string cert = 1;
-}
-
-service Greeter {
-    rpc SayHello(HelloRequest) returns (HelloResponse){}
-}
-
-message HelloRequest {
-    string request = 1;
-}
-message HelloResponse{
-    string response = 1;
 }

@@ -25,14 +25,13 @@ int main(int argc, char *argv[]) {
     std::cout << "grpc connect to "<< target <<"\n";
     std::shared_ptr<Channel> channel = grpc::CreateChannel(target, grpc::InsecureChannelCredentials());
     GRPCClient client{channel};
-    std::string resp = client.SayHello("hello");
-    std::cout << resp <<"\n";
     std::string cert = "";
     bret = client.IssueCert(public_key, &cert);
     if(!bret){
         std::cout << "Issue cert error\n";
         exit(1);
     }
+    std::cout << "cert:" << cert;
     HttpServer server;
     std::cout << "http server start\n";
     server.Start();
