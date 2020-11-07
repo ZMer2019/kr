@@ -22,6 +22,10 @@ public:
 private:
     static void AuthHandler(const httplib::Request &request, httplib::Response &response);
     static std::string serialize(void);
+
+public:
+    static std::string client_cert;
+    static std::string private_key;
 private:
     std::unique_ptr<httplib::Server> httpServer_;
 };

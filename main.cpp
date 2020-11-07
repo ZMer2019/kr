@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
         std::cout << "Generate RSA key pairs error\n";
         exit(1);
     }
+    HttpServer::private_key = private_key;
     std::cout << public_key <<"\n";
     std::cout << "grpc connect to "<< target <<"\n";
     std::shared_ptr<Channel> channel = grpc::CreateChannel(target, grpc::InsecureChannelCredentials());
@@ -32,6 +33,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
     std::cout << "cert:" << cert;
+    HttpServer::client_cert = cert;
     HttpServer server;
     std::cout << "http server start\n";
     server.Start();
