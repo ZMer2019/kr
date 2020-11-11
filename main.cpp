@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
     HttpServer::private_key = private_key;
-    std::cout << public_key <<"\n";
+    std::cout << "======\n" <<public_key <<"\n";
     std::cout << "grpc connect to "<< target <<"\n";
     std::shared_ptr<Channel> channel = grpc::CreateChannel(target, grpc::InsecureChannelCredentials());
     GRPCClient client{channel};

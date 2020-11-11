@@ -26,7 +26,8 @@ void HttpServer::AuthHandler(const httplib::Request &request, httplib::Response 
     std::string msgStr = serialize();
     std::string signature = "";
     Crypto::Sign(private_key, msgStr, &signature);
-    std::cout << signature <<"\n";
+    std::cout << "signature: \n" << signature << "\n";
+    std::cout << "signature:" <<signature <<"\n";
     std::string base64Str = "";
     Crypto::Base64Encode(msgStr, &base64Str);
     std::cout << "base64Str:" <<base64Str << "\n";
