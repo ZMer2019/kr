@@ -26,19 +26,19 @@ void HttpServer::AuthHandler(const httplib::Request &request, httplib::Response 
     std::string msgStr = serialize();
     std::string signature = "";
     Crypto::Sign(private_key, msgStr, &signature);
-    std::cout << "signature: \n" << signature << "\n";
     std::cout << "signature:" <<signature <<"\n";
-    std::string base64Str = "";
-    Crypto::Base64Encode(msgStr, &base64Str);
-    std::cout << "base64Str:" <<base64Str << "\n";
-    std::string base64Sign = "";
-    Crypto::Base64Encode(signature, &base64Sign);
+    std::string base64Msg = "";
+    Crypto::Base64Encode(msgStr, &base64Msg);
+    std::cout << "base64Msg:" <<base64Msg << "\n";
 
     std::string base64Cert = "";
     Crypto::Base64Encode(client_cert, &base64Cert);
 
     std::string redirectUrl = request.get_param_value("oriurl");
-    redirectUrl += "?authInfo=" + base64Str + "&sign=" + base64Sign + "&cert=" + base64Cert;
+    base64Msg = httplib::detail::encode_url(base64Msg);
+    signature = httplib::detail::encode_url(signature);
+    base64Cert = httplib::detail::encode_url(base64Cert);
+    redirectUrl += "?authInfo=" + base64Msg + "&sign=" + signature + "&cert=" + base64Cert;
     std::cout << "rediret url:" << redirectUrl <<"\n";
     response.set_redirect(redirectUrl);
 }

@@ -8,6 +8,7 @@
 #include <cryptopp/pssr.h>
 #include <cryptopp/sha.h>
 #include <iostream>
+#include <assert.h>
 CryptoPP::AutoSeededRandomPool Crypto::s_rng_;
 
 void Crypto::Base64Encode(const std::string &str, std::string *out) {
